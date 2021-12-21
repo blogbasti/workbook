@@ -120,6 +120,8 @@ function install_file_if_needed () {
 function install_configs () {
   local method='install_configs'
 
+  title "syncing config files from workbook repository"
+
   install_file_if_needed files/default/.vimrc $HOME/.vimrc
   install_file_if_needed files/default/.zshrc $HOME/.zshrc
 }
@@ -153,9 +155,22 @@ function install_spaceship () {
   # brew install --cask homebrew/cask-fonts/font-fira-mono-for-powerline
 }
 
+function install_ruby_versions () {
+  local method='install_ruby_versions'
+
+  title "install required ruby versions for projects"
+
+  # required for klangturm
+  rbenv install -s 2.7.3
+}
+
+info "start preparing this machine into workbook"
+
 prepare_env
 install_spaceship
 install_configs
+install_ruby_versions
 
+info "finished"
 
 exit 0
